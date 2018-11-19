@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "./cell.css";
+import "./Cell.css";
 
 class Cell extends Component {
     shouldComponentUpdate(nextProps) {

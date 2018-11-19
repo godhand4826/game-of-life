@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Cell from "./Cell";
-import "./cellMap.css"
+import "./CellMap.css"
 
 class CellMap extends Component {
     constructor(props) {

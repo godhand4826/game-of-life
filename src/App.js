@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./App.css"
 import ControlMenu from "./ControlMenu";
 import CellMap from "./CellMap";
 
@@ -7,32 +8,31 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.STATUS = {
-            RUNNING: 1,
-            PAUSED: 2,
+            RUNNING: 'RUNNING',
+            PAUSED: 'PAUSED',
         }
-        this.SPEED = {
-            SLOW: 1,
-            FAST: 2,
-        }
+
         this.play = this.play.bind(this)
         this.step = this.step.bind(this)
         this.pause = this.pause.bind(this)
-        this.slow = this.slow.bind(this)
-        this.fast = this.fast.bind(this)
+        this.slower = this.slower.bind(this)
+        this.faster = this.faster.bind(this)
         this.seed = this.seed.bind(this)
         this.clear = this.clear.bind(this)
         this.toggleCell = this.toggleCell.bind(this)
 
-
-
         this.state = {
             requestID: null,
             status: this.STATUS.PAUSED,
-            speed: this.SPEED.SLOW,
+            speed: 80,
             cells: new Array(20 * 20).fill(false),
             width: 20,
             height: 20
         }
+    }
+
+    componentDidMount() {
+        this.seed()
     }
 
     step() {
@@ -98,10 +98,16 @@ class App extends Component {
             || window.mozRequestAnimationFrame
             || window.webkitRequestAnimationFrame
             || window.msRequestAnimationFrame
-
+        let pastFrame = 0;
         const tickLoop = () => {
             if (this.state.status === this.STATUS.RUNNING) {
-                this.tick()
+                if (100 - this.state.speed <= pastFrame) {
+                    this.tick()
+                    pastFrame = 0
+                } else {
+                    pastFrame = (pastFrame + 1) % 100
+                }
+
                 requestAnimationFrame(tickLoop)
             }
         }
@@ -123,12 +129,20 @@ class App extends Component {
         })
     }
 
-    slow() {
-        console.log('slow')
+    slower() {
+        console.log('slower')
+        const current = this.state.speed
+        if (current - 10 >= 0) {
+            this.setState({ speed: current - 10 })
+        }
     }
 
-    fast() {
-        console.log('fast')
+    faster() {
+        console.log('faster')
+        const current = this.state.speed
+        if (current + 10 <= 100) {
+            this.setState({ speed: current + 10 })
+        }
     }
 
     seed() {
@@ -157,13 +171,15 @@ class App extends Component {
 
 
     render() {
-        return (<div>
+        return (<div className="app">
             <ControlMenu
+                status={this.state.status}
+                speed={this.state.speed}
                 play={this.play}
                 step={this.step}
                 pause={this.pause}
-                fast={this.fast}
-                slow={this.slow}
+                faster={this.faster}
+                slower={this.slower}
                 seed={this.seed}
                 clear={this.clear}
             />

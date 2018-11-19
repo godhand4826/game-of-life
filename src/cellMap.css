@@ -1,9 +1,13 @@
 .board-row:after {
   clear: both;
   content: "";
-  display: table;
+  display: block;
+  width: 700px;
+  margin: auto;
 }
 
 .board {
-  display: inline-block;
+  display: block;
+  width: 700px;
+  margin: auto;
 }

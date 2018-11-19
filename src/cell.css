@@ -6,11 +6,12 @@
   font-weight: bold;
   line-height: 34px;
   height: 34px;
-  margin-right: -1px;
-  margin-bottom: -1px;
+  /* margin-right: -1px; */
+  /* margin-bottom: -1px; */
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 5%;
+  margin: auto;
 }
 
 .square:focus {
