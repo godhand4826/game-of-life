@@ -9,8 +9,7 @@ class Cell extends Component {
     render() {
         return (<button
             onClick={this.props.toggle}
-            onDragEnter={this.props.toggle}
-            draggable="true"
+            onMouseEnter={this.props.onDrag}
             className={"square " + (this.props.alive ? 'alive' : '')}
         >
         </button >);

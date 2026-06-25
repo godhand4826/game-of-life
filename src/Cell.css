@@ -1,26 +1,23 @@
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  background: #161b22;
+  border: 1px solid #21262d;
   float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
   height: 34px;
-  /* margin-right: -1px; */
-  /* margin-bottom: -1px; */
   padding: 0;
-  text-align: center;
   width: 5%;
-  margin: auto;
+  transition: background 0.08s ease, box-shadow 0.08s ease;
+}
+
+.square:hover {
+  background: #1f3a2a;
+  cursor: pointer;
 }
 
 .square:focus {
   outline: none;
 }
-.square:hover{
-  cursor: pointer;
-}
 
 .alive {
-  background: red;
+  background: #4ade80;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
 }

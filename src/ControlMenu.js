@@ -3,27 +3,28 @@ import "./ControlMenu.css"
 
 class ControlMenu extends Component {
     render() {
+        const isRunning = this.props.status === "RUNNING";
         return (
             <div className="controlMenu">
                 <div className="controlButtons">
-                    <button onClick={this.props.play}><div className="play"></div>Play</button>
-                    <button onClick={this.props.step}><div className="step"></div>Step</button>
-                    <button onClick={this.props.pause}><div className="pause"></div>Pause</button>
-                    <button onClick={this.props.seed}><div className="seed"></div>Seed</button>
-                    <button onClick={this.props.clear}><div className="clear"></div>Clear</button>
+                    <button onClick={isRunning ? this.props.pause : this.props.play}>
+                        {isRunning ? '⏸ Pause' : '▶ Play'}
+                    </button>
+                    <button onClick={this.props.step}>&gt; Step</button>
+                    <button onClick={this.props.seed}>🎲 Random</button>
+                    <button onClick={this.props.clear}>✕ Clear</button>
                 </div>
                 <div className="info">
                     <div className="status">
-                        {this.props.status === "PAUSED" ? <div className="pause"></div> : <div className="play"></div>}
+                        <span className={`status-dot ${isRunning ? 'running' : ''}`}></span>
                         {this.props.status}
                     </div>
                     <div className="speedControl">
-                        <button onClick={this.props.slower}>Slower</button>
-                        {this.props.speed}
-                        <button onClick={this.props.faster}>Faster</button>
+                        <button onClick={this.props.slower}>−</button>
+                        <span className="speed-value">Speed: {this.props.speed}</span>
+                        <button onClick={this.props.faster}>+</button>
                     </div>
                 </div>
-
             </div>
         );
     }

@@ -5,15 +5,32 @@ import "./CellMap.css"
 class CellMap extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = { isMouseDown: false }
+        this.handleMouseDown = this.handleMouseDown.bind(this)
+        this.handleMouseUp = this.handleMouseUp.bind(this)
+    }
+
+    componentDidMount() {
+        window.addEventListener('mouseup', this.handleMouseUp)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('mouseup', this.handleMouseUp)
+    }
+
+    handleMouseDown() {
+        this.setState({ isMouseDown: true })
+    }
+
+    handleMouseUp() {
+        this.setState({ isMouseDown: false })
     }
 
     renderCell(x, y) {
         const index = x + this.props.width * y
         return (<Cell
-            toggle={(e) => {
-                this.props.toggle(index)
-            }}
+            toggle={() => this.props.toggle(index)}
+            onDrag={() => { if (this.state.isMouseDown) this.props.toggle(index) }}
             alive={this.props.cells[index]}
             key={index}
         />)
@@ -32,7 +49,7 @@ class CellMap extends Component {
             board.push(<div className="board-row" key={y}>{children}</div>)
         }
 
-        return (<div className="board">{board}</div>)
+        return (<div className="board" onMouseDown={this.handleMouseDown}>{board}</div>)
     }
 }
 

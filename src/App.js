@@ -172,6 +172,7 @@ class App extends Component {
 
     render() {
         return (<div className="app">
+            <h1 className="app-title">Game of Life</h1>
             <ControlMenu
                 status={this.state.status}
                 speed={this.state.speed}
