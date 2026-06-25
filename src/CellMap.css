@@ -1,11 +1,12 @@
 .board {
   display: block;
-  width: 700px;
+  width: min(700px, calc(100vw - 32px));
   margin: 0 auto 24px;
   border: 1px solid #21262d;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 0 48px rgba(74, 222, 128, 0.06);
+  touch-action: none;
 }
 
 .board-row:after {

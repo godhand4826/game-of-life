@@ -10,6 +10,7 @@ class Cell extends Component {
         return (<button
             onClick={this.props.toggle}
             onMouseEnter={this.props.onDrag}
+            data-index={this.props.index}
             className={"square " + (this.props.alive ? 'alive' : '')}
         >
         </button >);
